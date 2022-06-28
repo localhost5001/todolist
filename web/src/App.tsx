@@ -3,6 +3,8 @@ import { Routes, Route } from 'react-router-dom'
 
 import './App.css'
 
+import Layout from '@/components/layout'
+
 const Login = lazy(() => import('@/views/login'))
 const Home = lazy(() => import('@/views/home'))
 
@@ -15,20 +17,25 @@ function App() {
     <Routes>
       <Route 
         path='/'
-        element={
-          <Suspense fallback={<SuspenseFallback />}>
-            <Home />
-          </Suspense>
-        }
-      />
-      <Route 
-        path='/login'
-        element={
-          <Suspense fallback={<SuspenseFallback />}>
-            <Login />
-          </Suspense>
-        }  
-      />
+        element={<Layout />}
+      >
+        <Route 
+          index
+          element={
+            <Suspense>
+              <Home />
+            </Suspense>
+          }
+        />
+        <Route 
+          path='/login'
+          element={
+            <Suspense fallback={<SuspenseFallback />}>
+              <Login />
+            </Suspense>
+          }  
+        />
+      </Route>
     </Routes>
   )
 }
