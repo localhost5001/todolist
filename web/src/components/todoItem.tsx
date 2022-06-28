@@ -12,12 +12,6 @@ export default function TodoItem(props: TodoItemProps) {
   const [textInputValue, setTextInputValue] = useState(props.text)
   const [showTextInput, setShowTextInput] = useState(false)
 
-  const textClasses = useMemo(() => {
-    return props.checked 
-      ? 'text-base pl-2 w-full cursor-pointer line-through' 
-      : 'text-base pl-2 w-full cursor-pointer'
-  }, [props.checked])
-
   const handleTextClick = () => {
     setShowTextInput(true)
   }
@@ -34,24 +28,27 @@ export default function TodoItem(props: TodoItemProps) {
   }, [showTextInput])
 
   const renderInput = useMemo(() => {
-    return showTextInput
-      ? (
-        <input 
-          ref={textInputRef}
-          type="text"
-          defaultValue={textInputValue}
-          onChange={e => setTextInputValue(e.target.value)}
-          placeholder="Type here" 
-          className="input input-ghost input-xs w-full max-w-xs text-base" 
-          onBlur={handleTextInputBlur}
-        />
-      )
-      : (
-        <p className={textClasses} onClick={handleTextClick}>
-          { props.text }
-        </p>
-      )
-  }, [showTextInput, textInputValue])
+    if (showTextInput) {
+      return (<input 
+        ref={textInputRef}
+        type="text"
+        defaultValue={textInputValue}
+        onChange={e => setTextInputValue(e.target.value)}
+        placeholder="Type here" 
+        className="input input-ghost input-xs w-full max-w-xs text-base" 
+        onBlur={handleTextInputBlur}
+      />)
+    }
+
+    const classes = props.checked 
+      ? 'text-base pl-2 w-full cursor-pointer line-through' 
+      : 'text-base pl-2 w-full cursor-pointer'
+    return (
+      <p className={classes} onClick={handleTextClick}>
+        { props.text }
+      </p>
+    )
+  }, [showTextInput, textInputValue, props.checked])
 
   return (
     <div 
