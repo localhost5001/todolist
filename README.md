@@ -8,7 +8,7 @@ docker-compose up
 
 ## Installing new dependencies
 
-Dependencies cannot be installed directly, it may be done vie docker compose.
+Dependencies cannot be installed directly, it may be done via docker compose.
 
 ### For web
 ```
