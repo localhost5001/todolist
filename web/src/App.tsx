@@ -7,6 +7,7 @@ import Layout from '@/components/layout'
 
 const Login = lazy(() => import('@/views/login'))
 const Home = lazy(() => import('@/views/home'))
+const TodoList = lazy(() => import('@/views/todoList'))
 const NotFound = lazy(() => import('@/views/notFound'))
 
 function SuspenseFallback() {
@@ -33,6 +34,14 @@ function App() {
           element={
             <Suspense fallback={<SuspenseFallback />}>
               <Login />
+            </Suspense>
+          }  
+        />
+        <Route 
+          path='/list/:id'
+          element={
+            <Suspense fallback={<SuspenseFallback />}>
+              <TodoList />
             </Suspense>
           }  
         />
