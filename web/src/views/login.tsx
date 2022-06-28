@@ -1,6 +1,6 @@
 import { useState } from 'react'
 
-const login = () => {
+export default function Login() {
   const [login, setLogin] = useState('')
   const [password, setPassword] = useState('')
 
@@ -55,5 +55,3 @@ const login = () => {
     </div>
   )
 }
-
-export default login
