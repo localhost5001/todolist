@@ -16,7 +16,7 @@ export default function TodoItem(props: TodoItemProps) {
     setShowTextInput(true)
   }
   const handleTextInputBlur = () => {
-    if (textInputValue) {
+    if (textInputValue && textInputValue !== props.text) {
       props.onTextChange(textInputValue)
     } else {
       setTextInputValue(props.text)
