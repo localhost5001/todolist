@@ -7,6 +7,7 @@ import Layout from '@/components/layout'
 
 const Login = lazy(() => import('@/views/login'))
 const Home = lazy(() => import('@/views/home'))
+const NotFound = lazy(() => import('@/views/notFound'))
 
 function SuspenseFallback() {
   return <div className='h-screen w-full grid place-items-center'>Loading...</div>
@@ -36,6 +37,7 @@ function App() {
           }  
         />
       </Route>
+      <Route path="*" element={<NotFound />} />
     </Routes>
   )
 }
