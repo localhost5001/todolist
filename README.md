@@ -1,4 +1,4 @@
-# Simple To-Do List app
+# To-Do List app
 
 ## Running the application
 Requires docker.
@@ -20,6 +20,7 @@ docker-compose exec web npm i ...
 - [recoil](https://recoiljs.org/) state management
 - [vite](https://vitejs.dev/) bundling and tooling
 - [tailwindcss](https://tailwindcss.com/) + [daisyui](https://daisyui.com/) styling and basic components
+- [react-router](https://reactrouter.com/)
 
 ## UI
 ![How app UI looks](./img/UI.png "Title")
