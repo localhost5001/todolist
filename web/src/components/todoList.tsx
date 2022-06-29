@@ -1,33 +1,41 @@
-import { useState, useMemo } from 'react'
+import { useState, useMemo, Suspense } from 'react'
+import { useRecoilState } from 'recoil'
 
 import TodoItem from '@/components/todoItem'
 import NewTodoItem from '@/components/newTodoItem'
 
 import type { TodoItemPayload } from '@/models/todoItem'
 
+import { todoFamily } from '@/state/todos'
+
 interface TodoListProps {
   id: number
   title: string
 }
 
-export default function TodoList (props: TodoListProps) {
+function TodoList (props: TodoListProps) {
+  const [items, setItems] = useRecoilState(todoFamily(props.id))
   const [showNewItem, setShowNewItem] = useState(false)
 
-  const [items, setItems] = useState([
-    { id: 1, checked: false, text: 'Potato' },
-    { id: 2, checked: false, text: 'Apples' },
-    { id: 3, checked: false, text: 'Tea' },
-  ])
-
   const handleItemCheckedChange = (index: number, checked: boolean) => {
-    const newItems = [...items]
-    newItems[index].checked = checked
-    setItems(newItems)
+    setItems((oldArr) => {
+      const oldItem = oldArr[index]
+      const newArr = [...oldArr]
+
+      newArr[index] = {...oldItem, checked: checked}
+     
+      return newArr
+    })
   }
   const handleItemTextChange = (index: number, text: string) => {
-    const newItems = [...items]
-    newItems[index].text = text
-    setItems(newItems)
+    setItems((oldArr) => {
+      const oldItem = oldArr[index]
+      const newArr = [...oldArr]
+      
+      newArr[index] = {...oldItem, text: text}
+     
+      return newArr
+    })
   }
   const handleAddBtnClick = () => {
     setShowNewItem(!showNewItem)
@@ -84,5 +92,13 @@ export default function TodoList (props: TodoListProps) {
         }
       </div>
     </div>
+  )
+}
+
+export default function TodoListSuspensed(props: TodoListProps) {
+  return (
+    <Suspense fallback={<div className='h-screen w-full grid place-items-center font-bold text-lg'>Loading...</div>}>
+      <TodoList {...props} />
+    </Suspense>
   )
 }
