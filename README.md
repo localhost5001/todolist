@@ -1,4 +1,4 @@
-# To-Do List app
+# Simple To-Do List app
 
 ## Running the application
 Requires docker.
@@ -10,12 +10,16 @@ docker-compose up
 
 Dependencies cannot be installed directly, it may be done via docker compose.
 
-### For web
 ```
 docker-compose exec web npm i ...
 ```
 
-### For api
-```
-docker-compose exec api npm i ...
-```
+## Depndencies
+- typescript
+- react
+- [recoil](https://recoiljs.org/) state management
+- [vite](https://vitejs.dev/) bundling and tooling
+- [tailwindcss](https://tailwindcss.com/) + [daisyui](https://daisyui.com/) styling and basic components
+
+## UI
+![How app UI looks](./img/UI.png "Title")
