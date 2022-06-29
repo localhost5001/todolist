@@ -8,7 +8,7 @@ export default function Home() {
   const todoLists = useRecoilValue(todoListsState)
 
   return (
-    <div className="h-screen grid place-items-center">
+    <div className="grid place-items-center">
       <div className='w-full p-5 flex justify-center'>
         <div className='grid grid-cols-3 gap-4 w-full h-auto'>
           {
