@@ -55,7 +55,7 @@ export default function TodoItem(props: TodoItemProps) {
       className='
         flex space-x-4 
         bg-base-300 rounded-lg p-3 shadow-md
-        transition ease-in-out duration-200 hover:scale-105 hover:bg-base-200
+        transition ease-in-out duration-200 hover:scale-105 hover:bg-neutral-focus
       '
     >
       <input 

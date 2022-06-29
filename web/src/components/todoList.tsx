@@ -1,7 +1,18 @@
-import { useState } from 'react'
-import TodoItem from '@/components/todoItem'
+import { useState, useMemo } from 'react'
 
-export default function TodoList () {
+import TodoItem from '@/components/todoItem'
+import NewTodoItem from '@/components/newTodoItem'
+
+import type { TodoItemPayload } from '@/models/todoItem'
+
+interface TodoListProps {
+  id: number
+  title: string
+}
+
+export default function TodoList (props: TodoListProps) {
+  const [showNewItem, setShowNewItem] = useState(false)
+
   const [items, setItems] = useState([
     { id: 1, checked: false, text: 'Potato' },
     { id: 2, checked: false, text: 'Apples' },
@@ -18,22 +29,46 @@ export default function TodoList () {
     newItems[index].text = text
     setItems(newItems)
   }
+  const handleAddBtnClick = () => {
+    setShowNewItem(!showNewItem)
+  }
+  const onSaveClick = (payload: TodoItemPayload) => {
+    console.log(payload)
+  }
+
+  const renderNewItemEl = useMemo(() => {
+    if (showNewItem) {
+      return (
+        <div className='mb-2'>
+          <NewTodoItem 
+            listId={props.id}
+            onSave={onSaveClick}
+          />
+        </div>
+      )
+    }
+
+    return null
+  }, [showNewItem])
+
 
   return (
     <div className='block'>
-
       <div className='w-full flex justify-between mb-1'>
         <div className='font-semibold text-lg'>
-          List 1
+          { props.title }
         </div>
         <button 
+          onClick={handleAddBtnClick}
           className='
             btn btn-sm 
           '
         >
-          Add
+          { showNewItem ? 'Cancel' : 'New' }
         </button>
       </div>
+
+      { renderNewItemEl }
 
       <div className='flex flex-col space-y-2'>
         {

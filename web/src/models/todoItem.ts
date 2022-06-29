@@ -1,5 +1,8 @@
-export interface TodoItem {
+export interface TodoItemModel {
   id: number
-  done: boolean
-  description: string
+  listId: number
+  checked: boolean
+  text: string
 }
+
+export type TodoItemPayload = Omit<TodoItemModel, 'id'>
